@@ -22,7 +22,7 @@ Finally, once you have merged the cell count and phenotype data, you need to cre
 # 2. Generate surrogate variables 
 Surrogate variables (SVs) will be used to control for batch and any unmeasured variation in the methylation data that is not related to our variable of interest or covariates. Because we are going to run the EWAS twice, once with and once without adjusting for cell counts, this script regresses out cell counts from the methylation data before generating the SVs.
 
-Please run the script XXX in this repository (xxx)
+Please run the script gen_svs.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/gen_svs.R)
 
 This script will produce a file with the SVs (currently named ad-svs.tsv), and will add the names of the SVs to the text files containing the covariate names. 
 
@@ -36,7 +36,7 @@ Before running the EWAS, please double check these covariate files to make sure 
 The EWAS will be run twice - once not adjusting for cell counts (3a), and once adjusting for cell counts (3b).
 
 # 3a. EWAS not adjusting for cell counts
-Please run script conventional-ewas-AD-no-cc.R in this repository (xxx).
+Please run script conventional-ewas-AD-no-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/conventional-ewas-AD-no-cc.R).
 
 In the output file names at the start of the script, please add you cohort name in place of [cohort_name]
 
@@ -48,7 +48,7 @@ This script will produce the following 5 output files that you need to send to u
 - [cohort_name]_AD_ewas_summary_stats_no_cc.csv
 
 # 3b. EWAS adjusting for cell counts
-Please run script conventional-ewas-AD-cc.R in this repository (xxx)
+Please run script conventional-ewas-AD-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/conventional-ewas-AD-cc.R)
 
 In the output file names at the start of the script, please add you cohort name in place of [cohort_name]
 
@@ -63,7 +63,7 @@ This script will produce the following 5 output files that you need to send to u
 The EWAS will be run twice - once not adjusting for cell counts (4a), and once adjusting for cell counts (4b).
 
 # 3a. Variance EWAS not adjusting for cell counts
-Please run script var-ewas-AD-no-cc.R in this repository (xxx).
+Please run script var-ewas-AD-no-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/var-ewas-AD-no-cc.R).
 
 This script will produce the following 4 output files that you need to send to us:
 - [cohort_name]_var-ewas-pheno_summary_numeric_vars_meanSD_no-cc.csv
