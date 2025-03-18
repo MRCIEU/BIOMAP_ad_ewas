@@ -1,5 +1,5 @@
 # ----------------------------------------
-# Variance EWAS script - version 1 of 2 - with no cell count adjustment
+# Variance EWAS script - version 2 of 2 - with cell count adjustment
 # Generation Scotland
 # initially written by Tom Battram
 # Edited by Sarah Watkins, July 2024
