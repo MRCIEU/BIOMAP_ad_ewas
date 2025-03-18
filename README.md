@@ -62,7 +62,7 @@ This script will produce the following 5 output files that you need to send to u
 # 4. Run variance EWAS
 The EWAS will be run twice - once not adjusting for cell counts (4a), and once adjusting for cell counts (4b).
 
-# 3a. Variance EWAS not adjusting for cell counts
+# 4a. Variance EWAS not adjusting for cell counts
 Please run script var-ewas-AD-no-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/var-ewas-AD-no-cc.R).
 
 This script will produce the following 4 output files that you need to send to us:
@@ -72,7 +72,7 @@ This script will produce the following 4 output files that you need to send to u
 - [cohort_name]_varewas-res-no-cc.tsv
 
 
-# 3b. Variance EWAS adjusting for cell counts
+# 4b. Variance EWAS adjusting for cell counts
 Please run script var-ewas-AD-cc.R in this repository (xxx).
 
 This script will produce the following 4 output files that you need to send to us:
