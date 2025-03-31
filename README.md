@@ -50,6 +50,9 @@ This script will produce the following 5 output files that you need to send to u
 # 3b. EWAS adjusting for cell counts
 Please run script conventional-ewas-AD-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/conventional-ewas-AD-cc.R)
 
+If you get an error along the lines of the model being singular, it's likely due to cell count proportions. Simply remove one of the cell counts like this:
+covariates <- covariates[!covariates=="Baso"]
+
 In the output file names at the start of the script, please add you cohort name in place of [cohort_name]
 
 This script will produce the following 5 output files that you need to send to us:
@@ -73,7 +76,10 @@ This script will produce the following 4 output files that you need to send to u
 
 
 # 4b. Variance EWAS adjusting for cell counts
-Please run script var-ewas-AD-cc.R in this repository (xxx).
+Please run script var-ewas-AD-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/var-ewas-AD-cc.R).
+If you get an error along the lines of the model being singular, it's likely due to cell count proportions. Simply remove one of the cell counts like this:
+covariates <- covariates[!covariates=="Baso"]
+
 
 This script will produce the following 4 output files that you need to send to us:
 - [cohort_name]_var-ewas-pheno_summary_numeric_vars_meanSD-cc.csv
