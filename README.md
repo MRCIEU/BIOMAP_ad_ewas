@@ -19,7 +19,28 @@ These cell counts should now be added to the phenotype file (ad-data-cleaned.tsv
 
 Finally, once you have merged the cell count and phenotype data, you need to create two vectors of covariate names - one without cell counts (this will probably just be age and sex) and one with those covariates plus cell count names. Write these to two text files - covars-no-cc.txt and covars-cc.txt
 
-# 2. Generate surrogate variables 
+# 2. Optional step - Regressing out relatedness from the methylation data
+*only if you have relatedness structure in your cohort*
+
+Pull the GODMC2 pipeline and run up to and including steps 3a.
+
+Make sure you change some of the options in the config file - for this step, the important one is the meth_chunks argument. This is set to 100 as default, which is fine for smaller datasets. But for datasets going up to multiple thousands of participants you may need to increase this (for example, for 6.5k participants we set it to 1000).
+
+For simplicity, you can now run a modified version of 3b. But you will need to replace a couple of the pipeline scripts with slightly altered versions:
+
+03b-methylation_adjustment2.txt is an example of a submission script (it will need to be edited to suit the scheduler you use on your cluster). This is the script you use to submit the job.
+
+03b-methylation_adjustment2.sh is a slightly altered version of 03b-methylation_adjustment1.sh that sits in the *godmc_phase2* folder that you pulled from git. Please add 03b-methylation_adjustment2.sh to that folder (it will only run the untransformed version of relatedness adjustment, and it will run a different version of the following R script).
+
+adjust_pedigree_notransform.R is a slightly altered version of adjust_pedigree.R which sits in the godmc_phase2/resources/methylation folder. Please add adjust_pedigree_notransform.R to this folder. This script adjusts for relatedness, and will save out as many Rdata files as you specified in meth_chunks. 
+
+Once you have run this, you will need to check that all of the array jobs ran successfully (sometimes on a cluster a few of the jobs might fail). 
+
+You can check this using check_gs_3b.txt, and re-run the failed jobs.
+
+Once all the jobs have run, aggregate_adjustment1.sh in the GODMC pipeline.
+
+# 3. Generate surrogate variables 
 Surrogate variables (SVs) will be used to control for batch and any unmeasured variation in the methylation data that is not related to our variable of interest or covariates. Because we are going to run the EWAS twice, once with and once without adjusting for cell counts, this script regresses out cell counts from the methylation data before generating the SVs.
 
 Please run the script gen_svs.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/gen_svs.R)
@@ -32,10 +53,10 @@ Please check the heatmap produced by this script for association between SVs and
 
 Before running the EWAS, please double check these covariate files to make sure they contain the correct covariates!
 
-# 3. Run conventional EWAS
+# 4. Run conventional EWAS
 The EWAS will be run twice - once not adjusting for cell counts (3a), and once adjusting for cell counts (3b).
 
-# 3a. EWAS not adjusting for cell counts
+# 4a. EWAS not adjusting for cell counts
 Please run script conventional-ewas-AD-no-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/conventional-ewas-AD-no-cc.R).
 
 In the output file names at the start of the script, please add you cohort name in place of [cohort_name]
@@ -47,7 +68,7 @@ This script will produce the following 5 output files that you need to send to u
 - [cohort_name]_AD_ewas_report_no_cc.html
 - [cohort_name]_AD_ewas_summary_stats_no_cc.csv
 
-# 3b. EWAS adjusting for cell counts
+# 4b. EWAS adjusting for cell counts
 Please run script conventional-ewas-AD-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/conventional-ewas-AD-cc.R)
 
 If you get an error along the lines of the model being singular, it's likely due to cell count proportions. Simply remove one of the cell counts like this:
@@ -62,10 +83,10 @@ This script will produce the following 5 output files that you need to send to u
 - [cohort_name]_AD_ewas_report_cc.html
 - [cohort_name]_AD_ewas_summary_stats_cc.csv
 
-# 4. Run variance EWAS
+# 5. Run variance EWAS
 The EWAS will be run twice - once not adjusting for cell counts (4a), and once adjusting for cell counts (4b).
 
-# 4a. Variance EWAS not adjusting for cell counts
+# 5a. Variance EWAS not adjusting for cell counts
 Please run script var-ewas-AD-no-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/var-ewas-AD-no-cc.R).
 
 This script will produce the following 4 output files that you need to send to us:
@@ -75,7 +96,7 @@ This script will produce the following 4 output files that you need to send to u
 - [cohort_name]_varewas-res-no-cc.tsv
 
 
-# 4b. Variance EWAS adjusting for cell counts
+# 5b. Variance EWAS adjusting for cell counts
 Please run script var-ewas-AD-cc.R in this repository (https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/var-ewas-AD-cc.R).
 If you get an error along the lines of the model being singular, it's likely due to cell count proportions. Simply remove one of the cell counts like this:
 covariates <- covariates[!covariates=="Baso"]
