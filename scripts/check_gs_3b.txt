@@ -1,0 +1,17 @@
+cd data/results/03/logs_b
+
+#count of successfully completed jobs
+grep "Successfully adjusting covariates" log.txt* | wc -l
+
+## 
+#if any jobs have failed:
+find . -type f -exec grep -L "Successfully adjusting covariates" {} +
+
+# then resubmit the failed job(s):
+cd /godmc_phase2
+
+./03b-methylation_adjustment1.sh ${failed_task_id}
+
+# however if there are lots of failed jobs, re-submit 03b-methylation_adjustment2.txt with SBATCH --array (or equivalent) set to the numbers of the failed jobs 
+
+

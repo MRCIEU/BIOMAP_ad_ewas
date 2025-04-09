@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#SBATCH --job-name=03b-methylation_adjustment2
+#SBATCH --nodes=1
+#SBATCH --mem=100G
+#SBATCH --ntasks=1
+#SBATCH --array=1000
+#SBATCH --time=14-00:00:00
+#SBATCH --output=/3b_outputs/03b-methylation_adjustment2-%A_%a.out
+#SBATCH --error=/3b_outputs/03b-methylation_adjustment2-%A_%a.error
+
+set -e
+
+echo "Running on ${HOSTNAME}"
+
+module add git/2.42.0 
+module add languages/R/4.4.1
+
+cd /godmc_phase2
+
+./03b-methylation_adjustment2.sh ${SLURM_ARRAY_TASK_ID}
