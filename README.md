@@ -7,7 +7,7 @@ Before running this pipeline, you will need to have normalised and cleaned your 
 
 For each R script, you will need to look through and check where you need to edit/change/add variable names. In V2 scripts we have indicated within the script exactly where you need to do so.
 
-Please remove outliers from the data; if this isn't part of your existing script you can use the following:
+Please remove outliers from the data; if this isn't part of your existing script you can use the remove_outliers.R script: https://github.com/MRCIEU/BIOMAP_ad_ewas/blob/main/scripts/remove_outliers.R 
 
 # Please then follow the pipeline as follows:
 
