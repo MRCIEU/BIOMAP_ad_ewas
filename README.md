@@ -11,9 +11,7 @@ Please remove outliers from the data; if this isn't part of your existing script
 
 #Function to remove outliers using the Tukey IQR*3 method
 IQR.removal <- function(meth) {
-
   rowIQR <- rowIQRs(meth, na.rm = T)
-  
   row2575 <- rowQuantiles(meth, probs = c(0.25, 0.75), na.rm = T)
   maskL <- meth < row2575[, 1] - 3 * rowIQR
   maskU <- meth > row2575[, 2] + 3 * rowIQR
