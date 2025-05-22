@@ -19,3 +19,4 @@ log.iqr <- data.frame(cpgs = row.names(norm.beta), NAs.before.IQR3 = rowSums(is.
 norm.beta <- IQR.removal(norm.beta)
 log.iqr$NAs.after.IQR3 <- rowSums(is.na(norm.beta))
 table(log.iqr$NAs.after.IQR3)
+save(norm.beta,file="norm.beta_no_outliers.Robj")
